@@ -1,43 +1,102 @@
-import React from 'react';
-import { CURRENT_USER } from '../data';
-
-export default function Sidebar({ activePage, setActivePage, onNewPost }) {
-  const navItems = [
-    { icon: 'bi-house-door-fill', label: 'Home', page: 'home' },
-    { icon: 'bi-search', label: 'Explore', page: 'explore' },
-    { icon: 'bi-bell', label: 'Notifications', page: 'notifications', badge: 4 },
-    { icon: 'bi-bookmark', label: 'Bookmarks', page: 'bookmarks' },
-    { icon: 'bi-person', label: 'Profile', page: 'profile' },
-  ];
-
+const Sidebar = ({ selectedTab, setSelectedTab }) => {
   return (
-    <nav className="sidebar">
-      <span className="sidebar-logo">Threadly</span>
-
-      {navItems.map(item => (
-        <button
-          key={item.page}
-          className={`nav-item ${activePage === item.page ? 'active' : ''}`}
-          onClick={() => setActivePage(item.page)}
+    <div
+      className="d-flex flex-column flex-shrink-0 p-3 text-bg-dark sidebar"
+      style={{ width: "180px" }}
+    >
+      <a
+        href="/"
+        className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"
+      >
+        <svg className="bi pe-none me-2" width="40" height="32">
+          <use xlinkHref="#bootstrap"></use>
+        </svg>
+        <span className="fs-4">Sidebar</span>
+      </a>
+      <hr />
+      <ul className="nav nav-pills flex-column mb-auto">
+        <li
+          className="nav-item"
+          onClick={() => {
+            setSelectedTab("Home");
+          }}
         >
-          <i className={`bi ${item.icon}`}></i>
-          {item.label}
-          {item.badge && <span className="badge-count">{item.badge}</span>}
-        </button>
-      ))}
-
-      <button className="btn-primary-custom mt-3 w-100" onClick={onNewPost}>
-        Post
-      </button>
-
-      <div className="sidebar-profile mt-auto" onClick={() => setActivePage('profile')}>
-        <img src={CURRENT_USER.avatar} alt="You" className="avatar" width={36} height={36} />
-        <div className="sidebar-profile-info">
-          <div className="sidebar-profile-name">{CURRENT_USER.name}</div>
-          <div className="sidebar-profile-handle">@{CURRENT_USER.handle}</div>
-        </div>
-        <i className="bi bi-three-dots" style={{ color: 'var(--text-secondary)' }}></i>
+          <a
+            href="#"
+            className={`nav-link text-white ${
+              selectedTab === "Home" && "active"
+            }`}
+            aria-current="page"
+          >
+            <svg className="bi pe-none me-2" width="16" height="16">
+              <use xlinkHref="#home"></use>
+            </svg>
+            Home
+          </a>
+        </li>
+        <li
+          onClick={() => {
+            setSelectedTab("Create Post");
+          }}
+        >
+          <a
+            href="#"
+            className={`nav-link text-white ${
+              selectedTab === "Create Post" && "active"
+            }`}
+          >
+            <svg className="bi pe-none me-2" width="16" height="16">
+              <use xlinkHref="#speedometer2"></use>
+            </svg>
+            Create Post
+          </a>
+        </li>
+      </ul>
+      <hr />
+      <div className="dropdown">
+        <a
+          href="#"
+          className="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
+          data-bs-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <img
+            src="https://github.com/mdo.png"
+            alt=""
+            width="32"
+            height="32"
+            className="rounded-circle me-2"
+          />
+          <strong>mdo</strong>
+        </a>
+        <ul className="dropdown-menu dropdown-menu-dark text-small shadow">
+          <li>
+            <a className="dropdown-item" href="#">
+              New project...
+            </a>
+          </li>
+          <li>
+            <a className="dropdown-item" href="#">
+              Settings
+            </a>
+          </li>
+          <li>
+            <a className="dropdown-item" href="#">
+              Profile
+            </a>
+          </li>
+          <li>
+            <hr className="dropdown-divider" />
+          </li>
+          <li>
+            <a className="dropdown-item" href="#">
+              Sign out
+            </a>
+          </li>
+        </ul>
       </div>
-    </nav>
+    </div>
   );
-}
+};
+
+export default Sidebar;
