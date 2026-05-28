@@ -42,6 +42,9 @@ myntra-clone/
 └── package.json
 ```
 
+![Home Page](./screenshots/home.png)
+![Product Listing](./screenshots/products.png)
+
 ## Getting Started
 
 ### Prerequisites
@@ -86,6 +89,3 @@ npm run build
 - **Routing**: Swap page state with `react-router-dom` for real URLs
 - **Payments**: Integrate Razorpay or Stripe on the checkout button
 
-## License
-
-MIT © 2025
